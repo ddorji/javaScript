@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Quiz Battle</title>
+  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+  <div class="container">
+    <h1>Quiz Battle</h1>
+      <!-- =========================
+         Step 1: Player setup
+         - Enter player names one by one
+         - Shows list of added players
+         ========================= -->
+    <div class="section setup-names active">
+      <p class="subtitle">Add players one by one.</p>
+
+      <!-- Left side: small wizard to add players -->
+      <div class="player-wizard">
+      <!-- Label text is updated by JS to "Player 1 / Player 2 ..." -->
+        <label id="playerPrompt" for="playerNameInput">Player 1 name</label>
+        <!-- Input where user types the player name -->
+        <input id="playerNameInput" type="text" placeholder="Enter a name and press Next" />
+        <!-- Inline message area for feedback like "Please enter a name." -->
+        <div id="setupMsg" class="muted" aria-live="polite"></div>
+
+        <!-- Buttons row: add player or continue -->
+        <div class="row">
+          <!-- Add current name to the players list -->
+          <button id="addPlayerBtn" type="button">Add Player</button>
+          <!-- Enabled only when there is at least 1 player -->
+          <button id="continueToDifficultyBtn" class="secondary" type="button">Continue</button>
+        </div>
+      </div>
+
+      <!-- Right side: list of added players -->
+      <div class="added-players">
+        <h3>Players</h3>
+        <!-- JS injects <li> items here for each player -->
+        <ul id="playersList"></ul>
+        <p class="info">You can remove a player by clicking the ✕ button.</p>
+      </div>
+    </div>
+
+    <!-- =========================
+         Step 2: Difficulty selection
+         - Easy or Hard radio options
+         ========================= -->
+    <div class="section setup-difficulty">
+      <p class="subtitle">Choose your difficulty.</p>
+      <div class="difficulty-card">
+        <!-- Default checked: easy -->
+        <label><input type="radio" name="difficulty" value="easy" checked> Easy</label>
+        <label><input type="radio" name="difficulty" value="hard"> Hard</label>
+      </div>
+      <!-- Start the quiz once difficulty option is chosen -->
+      <button id="startGameBtn" type="button">Start Game</button>
+      <!-- Go back button to add/remove players -->
+      <button id="backToNamesBtn" class="linklike" type="button">← Back</button>
+    </div>
+
+    <!-- =========================
+         Step 3: Quiz section
+         - Displays question, options, player turn, progress, timer
+         ========================= -->
+    <div class="section quiz">
+      <!-- Shows "It's X's turn" -->
+      <div id="playerTurn" class="muted"></div>
+      <!-- Current question text -->
+      <div class="question" id="question"></div>
+      <!-- Buttons for answer options are injected here -->
+      <div class="options" id="options"></div>
+      <!-- Bottom bar: question count and timer -->
+      <div class="quiz-footer">
+        <!-- "Q 1 / 10" etc -->
+        <span id="progressBar"></span>
+        <!-- Shows countdown seconds in hard mode -->
+        <span id="timer" class="muted"></span>
+      </div>
+    </div>
+
+    <!-- =========================
+         Step 4: Results section
+         - Final scores for each player
+         ========================= -->
+    <div class="section results">
+      <h2>✨ Final Scores ✨</h2>
+      <!-- javaScript program writes each player's score after the game -->
+      <div id="scoreboard"></div>
+      <!-- Play Again button reloads page to start over -->
+      <button id="playAgainBtn" type="button">Play Again</button>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,263 @@
+[
+  {
+    "q": "What is the capital city of Bhutan?",
+    "options": ["Thimphu", "Paro", "Punakha", "Phuentsholing"],
+    "answer": "Thimphu"
+  },
+  {
+    "q": "Which is the national flower of Bhutan?",
+    "options": ["Blue Poppy", "Lotus", "Edelweiss", "Rhododendron"],
+    "answer": "Blue Poppy"
+  },
+  {
+    "q": "Which currency is used in Bhutan?",
+    "options": ["Ngultrum", "Rupee", "Dollar", "Taka"],
+    "answer": "Ngultrum"
+  },
+  {
+    "q": "What is the national animal of Bhutan?",
+    "options": ["Takin", "Tiger", "Snow Leopard", "Elephant"],
+    "answer": "Takin"
+  },
+  {
+    "q": "Which country borders Bhutan to the south?",
+    "options": ["India", "China", "Nepal", "Bangladesh"],
+    "answer": "India"
+  },
+  {
+    "q": "What is Bhutan’s form of government?",
+    "options": ["Constitutional Monarchy", "Republic", "Absolute Monarchy", "Democracy"],
+    "answer": "Constitutional Monarchy"
+  },
+  {
+    "q": "Who is the current King of Bhutan (as of 2025)?",
+    "options": ["Jigme Khesar Namgyel Wangchuck", "Jigme Singye Wangchuck", "Jigme Dorji Wangchuck", "Ugyen Wangchuck"],
+    "answer": "Jigme Khesar Namgyel Wangchuck"
+  },
+  {
+    "q": "What is Bhutan’s national language?",
+    "options": ["Dzongkha", "Nepali", "Hindi", "English"],
+    "answer": "Dzongkha"
+  },
+  {
+    "q": "What is the predominant religion in Bhutan?",
+    "options": ["Buddhism", "Hinduism", "Islam", "Christianity"],
+    "answer": "Buddhism"
+  },
+  {
+    "q": "What is Bhutan’s national sport?",
+    "options": ["Archery", "Football", "Cricket", "Basketball"],
+    "answer": "Archery"
+  },
+  {
+    "q": "What is Bhutan’s official measure of progress?",
+    "options": ["Gross National Happiness", "Gross Domestic Product", "Human Development Index", "Quality of Life Index"],
+    "answer": "Gross National Happiness"
+  },
+  {
+    "q": "When did Bhutan transition to a constitutional monarchy?",
+    "options": ["2008", "1999", "2010", "2001"],
+    "answer": "2008"
+  },
+  {
+    "q": "Which airport is the only international airport in Bhutan?",
+    "options": ["Paro International Airport", "Thimphu Airport", "Punakha Airport", "Gelephu Airport"],
+    "answer": "Paro International Airport"
+  },
+  {
+    "q": "Which river is the longest in Bhutan?",
+    "options": ["Wang Chhu", "Amo Chhu", "Manas River", "Pho Chhu"],
+    "answer": "Manas River"
+  },
+  {
+    "q": "What is the national bird of Bhutan?",
+    "options": ["Raven", "Peacock", "Black-necked Crane", "Eagle"],
+    "answer": "Raven"
+  },
+  {
+    "q": "Which Bhutanese valley is famous for the Tiger’s Nest Monastery?",
+    "options": ["Paro Valley", "Haa Valley", "Punakha Valley", "Bumthang Valley"],
+    "answer": "Paro Valley"
+  },
+  {
+    "q": "What is the traditional dress for Bhutanese men called?",
+    "options": ["Gho", "Kira", "Kimono", "Lungi"],
+    "answer": "Gho"
+  },
+  {
+    "q": "What is the traditional dress for Bhutanese women called?",
+    "options": ["Kira", "Gho", "Sari", "Hanbok"],
+    "answer": "Kira"
+  },
+  {
+    "q": "Which mountain is the highest peak in Bhutan?",
+    "options": ["Gangkhar Puensum", "Jomolhari", "Kanchenjunga", "Lhotse"],
+    "answer": "Gangkhar Puensum"
+  },
+  {
+    "q": "Which festival is celebrated annually in Paro?",
+    "options": ["Paro Tshechu", "Thimphu Tshechu", "Punakha Drubchen", "Jambay Lhakhang Drup"],
+    "answer": "Paro Tshechu"
+  },
+  {
+    "q": "Which Bhutanese King introduced the concept of Gross National Happiness?",
+    "options": ["Jigme Singye Wangchuck", "Ugyen Wangchuck", "Jigme Dorji Wangchuck", "Jigme Khesar Namgyel Wangchuck"],
+    "answer": "Jigme Singye Wangchuck"
+  },
+  {
+    "q": "Which year did Bhutan join the United Nations?",
+    "options": ["1971", "1965", "1985", "1999"],
+    "answer": "1971"
+  },
+  {
+    "q": "What is the local name for Bhutan?",
+    "options": ["Druk Yul", "Shangri-La", "Lho Mon", "Land of Thunder"],
+    "answer": "Druk Yul"
+  },
+  {
+    "q": "What does 'Druk Yul' mean?",
+    "options": ["Land of the Thunder Dragon", "Land of the Rising Sun", "Land of Peace", "Land of the Himalayas"],
+    "answer": "Land of the Thunder Dragon"
+  },
+  {
+    "q": "Which country lies to the north of Bhutan?",
+    "options": ["China", "India", "Nepal", "Myanmar"],
+    "answer": "China"
+  },
+  {
+    "q": "In which district is Punakha Dzong located?",
+    "options": ["Punakha", "Thimphu", "Paro", "Bumthang"],
+    "answer": "Punakha"
+  },
+  {
+    "q": "Who was the first King of Bhutan?",
+    "options": ["Ugyen Wangchuck", "Jigme Wangchuck", "Jigme Dorji Wangchuck", "Jigme Singye Wangchuck"],
+    "answer": "Ugyen Wangchuck"
+  },
+  {
+    "q": "What is the national tree of Bhutan?",
+    "options": ["Cypress", "Pine", "Oak", "Juniper"],
+    "answer": "Cypress"
+  },
+  {
+    "q": "Which Bhutanese district shares a border with India’s Assam state?",
+    "options": ["Samtse", "Chukha", "Sarpang", "Trashigang"],
+    "answer": "Sarpang"
+  },
+  {
+    "q": "Which is Bhutan’s oldest dzong?",
+    "options": ["Simtokha Dzong", "Punakha Dzong", "Paro Dzong", "Trongsa Dzong"],
+    "answer": "Simtokha Dzong"
+  },
+  {
+    "q": "What is the literacy rate of Bhutan approximately (as of 2024)?",
+    "options": ["71%", "50%", "85%", "60%"],
+    "answer": "71%"
+  },
+  {
+    "q": "What is the main source of revenue for Bhutan?",
+    "options": ["Hydropower", "Tourism", "Agriculture", "Textiles"],
+    "answer": "Hydropower"
+  },
+  {
+    "q": "Which festival celebrates the victory of good over evil in Bhutan?",
+    "options": ["Tshechu", "Losar", "Thruebab", "Blessing Festival"],
+    "answer": "Tshechu"
+  },
+  {
+    "q": "Which is Bhutan’s national dish?",
+    "options": ["Ema Datshi", "Momos", "Thukpa", "Phaksha Paa"],
+    "answer": "Ema Datshi"
+  },
+  {
+    "q": "Which Bhutanese town is known as the financial hub of Bhutan?",
+    "options": ["Phuentsholing", "Thimphu", "Paro", "Samtse"],
+    "answer": "Phuentsholing"
+  },
+  {
+    "q": "Which year did Bhutan introduce television and the internet?",
+    "options": ["1999", "1995", "2000", "2005"],
+    "answer": "1999"
+  },
+  {
+    "q": "What color is prominently featured in the Bhutanese flag?",
+    "options": ["Orange and Yellow", "Red and White", "Blue and Green", "Black and Gold"],
+    "answer": "Orange and Yellow"
+  },
+  {
+    "q": "Which dragon is depicted on Bhutan’s national flag?",
+    "options": ["Druk", "Naga", "Garuda", "Tibetan Dragon"],
+    "answer": "Druk"
+  },
+  {
+    "q": "Who was the third King of Bhutan known as the 'Father of Modern Bhutan'?",
+    "options": ["Jigme Dorji Wangchuck", "Jigme Wangchuck", "Ugyen Wangchuck", "Jigme Singye Wangchuck"],
+    "answer": "Jigme Dorji Wangchuck"
+  },
+  {
+    "q": "Which Bhutanese city hosts the annual Black-Necked Crane Festival?",
+    "options": ["Phobjikha", "Thimphu", "Paro", "Trashigang"],
+    "answer": "Phobjikha"
+  },
+  {
+    "q": "Which mountain range runs through Bhutan?",
+    "options": ["Himalayas", "Andes", "Rockies", "Alps"],
+    "answer": "Himalayas"
+  },
+  {
+    "q": "What is Bhutan’s main export product?",
+    "options": ["Electricity", "Textiles", "Tea", "Spices"],
+    "answer": "Electricity"
+  },
+  {
+    "q": "Which Bhutanese district is famous for Bumthang cheese?",
+    "options": ["Bumthang", "Paro", "Wangdue", "Trongsa"],
+    "answer": "Bumthang"
+  },
+  {
+    "q": "What does the white dragon on the Bhutan flag hold in its claws?",
+    "options": ["Jewels", "Weapons", "Flowers", "Scrolls"],
+    "answer": "Jewels"
+  },
+  {
+    "q": "Which famous monastery clings to a cliff 900m above Paro Valley?",
+    "options": ["Tiger’s Nest Monastery", "Punakha Dzong", "Trongsa Dzong", "Kyichu Lhakhang"],
+    "answer": "Tiger’s Nest Monastery"
+  },
+  {
+    "q": "Which Bhutanese festival marks the new year?",
+    "options": ["Losar", "Tshechu", "Thruebab", "Haa Summer Festival"],
+    "answer": "Losar"
+  },
+  {
+    "q": "Which region of Bhutan experiences the highest rainfall?",
+    "options": ["Southern Bhutan", "Western Bhutan", "Central Bhutan", "Eastern Bhutan"],
+    "answer": "Southern Bhutan"
+  },
+  {
+    "q": "Which organization manages hydropower projects in Bhutan?",
+    "options": ["Druk Green Power Corporation", "Bhutan Power Corporation", "Hydro Bhutan", "Royal Energy Agency"],
+    "answer": "Druk Green Power Corporation"
+  },
+  {
+    "q": "Which Bhutanese festival involves mask dances and blessings?",
+    "options": ["Tshechu", "Losar", "Thruebab", "Neykor"],
+    "answer": "Tshechu"
+  },
+  {
+    "q": "Which Bhutanese king abdicated in favor of his son in 2006?",
+    "options": ["Jigme Singye Wangchuck", "Jigme Dorji Wangchuck", "Ugyen Wangchuck", "Jigme Khesar Namgyel Wangchuck"],
+    "answer": "Jigme Singye Wangchuck"
+  },
+  {
+    "q": "Which Bhutanese policy restricts the number of tourists annually?",
+    "options": ["High Value, Low Volume Tourism", "Free Tourism", "Visa-Free Policy", "Mass Tourism"],
+    "answer": "High Value, Low Volume Tourism"
+  },
+  {
+    "q": "Which year did Bhutan first hold democratic elections?",
+    "options": ["2008", "2005", "2010", "2013"],
+    "answer": "2008"
+  }
+]
+

@@ -1,0 +1,171 @@
+[
+  {
+    "questionItem": "What is the capital city of Bhutan?",
+    "options": ["Thimphu", "Paro", "Punakha", "Phuentsholing"],
+    "answer": "Thimphu"
+  },
+  {
+    "questionItem": "Which is the national flower of Bhutan?",
+    "options": ["Blue Poppy", "Lotus", "Edelweiss", "Rhododendron"],
+    "answer": "Blue Poppy"
+  },
+  {
+    "questionItem": "Which currency is used in Bhutan?",
+    "options": ["Ngultrum", "Rupee", "Dollar", "Taka"],
+    "answer": "Ngultrum"
+  },
+  {
+    "questionItem": "What is the national animal of Bhutan?",
+    "options": ["Takin", "Tiger", "Snow Leopard", "Elephant"],
+    "answer": "Takin"
+  },
+  {
+    "questionItem": "Which country borders Bhutan to the south?",
+    "options": ["India", "China", "Nepal", "Bangladesh"],
+    "answer": "India"
+  },
+  {
+    "questionItem": "What is Bhutan’s form of government?",
+    "options": ["Constitutional Monarchy", "Republic", "Absolute Monarchy", "Democracy"],
+    "answer": "Constitutional Monarchy"
+  },
+  {
+    "questionItem": "Who is the current King of Bhutan (as of 2025)?",
+    "options": ["Jigme Khesar Namgyel Wangchuck", "Jigme Singye Wangchuck", "Jigme Dorji Wangchuck", "Ugyen Wangchuck"],
+    "answer": "Jigme Khesar Namgyel Wangchuck"
+  },
+  {
+    "questionItem": "What is Bhutan’s national language?",
+    "options": ["Dzongkha", "Nepali", "Hindi", "English"],
+    "answer": "Dzongkha"
+  },
+  {
+    "questionItem": "What is the predominant religion in Bhutan?",
+    "options": ["Buddhism", "Hinduism", "Islam", "Christianity"],
+    "answer": "Buddhism"
+  },
+  {
+    "questionItem": "What is Bhutan’s national sport?",
+    "options": ["Archery", "Football", "Cricket", "Basketball"],
+    "answer": "Archery"
+  },
+  {
+    "questionItem": "What is Bhutan’s official measure of progress?",
+    "options": ["Gross National Happiness", "Gross Domestic Product", "Human Development Index", "Quality of Life Index"],
+    "answer": "Gross National Happiness"
+  },
+  {
+    "questionItem": "When did Bhutan transition to a constitutional monarchy?",
+    "options": ["2008", "1999", "2010", "2001"],
+    "answer": "2008"
+  },
+  {
+    "questionItem": "Which river is the longest in Bhutan?",
+    "options": ["Wang Chhu", "Amo Chhu", "Manas River", "Pho Chhu"],
+    "answer": "Manas River",
+    "difficulty": "hard"
+  },
+  {
+    "questionItem": "Which Bhutanese legal code was introduced by Zhabdrung Ngawang Namgyal in the 17th century?",
+    "options": ["Tsa Yig", "Cho Yig", "Driglam Namzha", "Tenpa Yig"],
+    "answer": "Tsa Yig",
+    "difficulty": "hard"
+  },
+  {
+    "questionItem": "In which year did Bhutan hold its first local government elections under the 2008 Constitution?",
+    "options": ["2011", "2008", "2010", "2013"],
+    "answer": "2011",
+    "difficulty": "hard"
+  },
+  {
+    "questionItem": "Which British officer visited Bhutan in 1905, paving the way for the 1907 coronation of Ugyen Wangchuck?",
+    "options": ["John Claude White", "Francis Younghusband", "Charles Bell", "Lord Curzon"],
+    "answer": "John Claude White",
+    "difficulty": "hard"
+  },
+  {
+    "questionItem": "What was the main outcome of the 1910 Treaty of Punakha for Bhutan?",
+    "options": [
+      "Bhutan accepted British guidance in foreign affairs",
+      "Bhutan ceded its southern territory to India",
+      "Bhutan became a British protectorate",
+      "Bhutan opened trade routes to Tibet"
+    ],
+    "answer": "Bhutan accepted British guidance in foreign affairs",
+    "difficulty": "hard"
+  },
+  {
+    "questionItem": "What is the national bird of Bhutan?",
+    "options": ["Raven", "Peacock", "Black-necked Crane", "Eagle"],
+    "answer": "Raven"
+  },
+  {
+    "questionItem": "Which Bhutanese valley is famous for the Tiger’s Nest Monastery?",
+    "options": ["Paro Valley", "Haa Valley", "Punakha Valley", "Bumthang Valley"],
+    "answer": "Paro Valley"
+  },
+  {
+    "questionItem": "Which year did Bhutan join the United Nations?",
+    "options": ["1971", "1965", "1985", "1999"],
+    "answer": "1971",
+    "difficulty": "hard"
+  },
+  {
+    "questionItem": "What is the local name for Bhutan?",
+    "options": ["Druk Yul", "Shangri-La", "Lho Mon", "Land of Thunder"],
+    "answer": "Druk Yul",
+    "difficulty": "hard"
+  },
+  {
+    "questionItem": "What is the national tree of Bhutan?",
+    "options": ["Cypress", "Pine", "Oak", "Juniper"],
+    "answer": "Cypress"
+  },
+  {
+    "questionItem": "Which is Bhutan’s oldest dzong?",
+    "options": ["Simtokha Dzong", "Punakha Dzong", "Paro Dzong", "Trongsa Dzong"],
+    "answer": "Simtokha Dzong",
+    "difficulty": "hard"
+  },
+  {
+    "questionItem": "What is the literacy rate of Bhutan approximately (as of 2024)?",
+    "options": ["71%", "50%", "85%", "60%"],
+    "answer": "71%",
+    "difficulty": "hard"
+  },
+  {
+    "questionItem": "Which year did Bhutan introduce television and the internet?",
+    "options": ["1999", "1995", "2000", "2005"],
+    "answer": "1999",
+    "difficulty": "hard"
+  },
+  {
+    "questionItem": "Who was known as the 'Father of Modern Bhutan'?",
+    "options": ["Jigme Dorji Wangchuck", "Jigme Wangchuck", "Ugyen Wangchuck", "Jigme Singye Wangchuck"],
+    "answer": "Jigme Dorji Wangchuck",
+    "difficulty": "hard"
+  },
+  {
+    "questionItem": "What is Bhutan’s main export product?",
+    "options": ["Electricity", "Textiles", "Tea", "Spices"],
+    "answer": "Electricity",
+    "difficulty": "hard"
+  },
+  {
+    "questionItem": "Which organization manages hydropower projects in Bhutan?",
+    "options": ["Druk Green Power Corporation", "Bhutan Power Corporation", "Hydro Bhutan", "Royal Energy Agency"],
+    "answer": "Druk Green Power Corporation"
+  },
+  {
+    "questionItem": "Which Bhutanese policy restricts the number of tourists annually?",
+    "options": ["High Value, Low Volume Tourism", "Free Tourism", "Visa-Free Policy", "Mass Tourism"],
+    "answer": "High Value, Low Volume Tourism",
+    "difficulty": "hard"
+  },
+  {
+    "questionItem": "Which year did Bhutan first hold democratic elections?",
+    "options": ["2008", "2005", "2010", "2013"],
+    "answer": "2008",
+    "difficulty": "hard"
+  }
+]

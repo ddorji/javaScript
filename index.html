@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Quiz Battle</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <!--
+  BODY:
+  - min-h-screen: full viewport height
+  - flex + items-center + justify-center: center content both vertically and horizontally
+  - bg-gradient-to-br: background gradient from top-left to bottom-right
+  - from-purple-200 to-blue-300: gradient colors
+  - font-sans: use a clean sans-serif font
+-->
+  <body
+    class="min-h-screen m-0 flex items-center justify-center bg-gradient-to-br from-purple-200 to-blue-300 font-sans"
+  >
+    <!-- 
+    Main card container:
+    - Relative: so decorative circles can be absolutely positioned inside
+    - bg-white: white card
+    - rounded-2xl: rounded corners
+    - shadow-2xl: strong shadow
+    - p-8: padding
+    - max-w-lg: limit width
+    - overflow-hidden: hide decorative circle overflow
+  -->
+    <div
+      class="relative bg-white rounded-2xl shadow-2xl p-8 w-full max-w-lg overflow-hidden"
+    >
+      <!-- Decorative circles in card background (purely visual) -->
+      <div
+        class="pointer-events-none absolute -top-10 -left-10 w-36 h-36 bg-pink-200/60 rounded-full"
+      ></div>
+      <div
+        class="pointer-events-none absolute -bottom-16 -right-16 w-44 h-44 bg-blue-200/60 rounded-full"
+      ></div>
+
+      <!-- Wraps all content so it stays above decorative circles (z-10) -->
+      <div class="relative z-10">
+        <!-- Main title -->
+        <h1 class="text-3xl font-bold text-blue-600 mb-2 text-center">
+          Quiz Battle
+        </h1>
+
+        <!-- =========================
+           Step 1: Player setup section
+           - Add player names
+           ========================= -->
+        <!-- 
+        class="section setup-names":
+        - "section" is used by JS to show/hide steps
+        - "setup-names" is used by setSection("setup-names")
+      -->
+        <div class="section setup-names">
+          <!-- Subtitle text -->
+          <p class="text-gray-600 mb-4 text-center">Add players one by one.</p>
+
+          <!-- Layout for left (form) + right (player list) -->
+          <div class="space-y-6">
+            <!-- Left side: input wizard for adding players -->
+            <div class="player-wizard text-left space-y-2">
+              <!-- Label above input; text is updated by JS (updatePlayerPrompt) -->
+              <label
+                id="playerPrompt"
+                for="playerNameInput"
+                class="block font-semibold text-gray-700"
+              >
+                Player 1 name
+              </label>
+
+              <!-- Text input for player name; JS reads value when "Add Player" or Enter is pressed -->
+              <input
+                id="playerNameInput"
+                type="text"
+                placeholder="Enter a name and press Add Player"
+                class="w-full px-3 py-2 rounded-lg border-2 border-sky-200 focus:outline-none focus:ring-2 focus:ring-sky-400"
+              />
+
+              <!-- Inline message area (validation / status) updated by setMsg() -->
+              <div
+                id="setupMsg"
+                class="text-sm text-gray-500 min-h-[1.25rem]"
+                aria-live="polite"
+              ></div>
+
+              <!-- Button row: Add Player + Continue -->
+              <!-- On small screens: stacked (flex-col), on larger: horizontal -->
+              <div class="row flex flex-col sm:flex-row gap-3">
+                <!-- 
+                "Add Player" button:
+                - id="addPlayerBtn" used by JS to attach click listener
+                - Calls addPlayerFromInput()
+              -->
+                <button
+                  id="addPlayerBtn"
+                  type="button"
+                  class="flex-1 px-4 py-2 rounded-lg bg-rose-400 text-white font-semibold shadow-md hover:bg-rose-500 transition"
+                >
+                  Add Player
+                </button>
+
+                <!-- 
+                "Continue" button:
+                - id="continueToDifficultyBtn"
+                - When clicked, JS checks there is at least one player,
+                  then switches to difficulty section
+              -->
+                <button
+                  id="continueToDifficultyBtn"
+                  type="button"
+                  class="flex-1 px-4 py-2 rounded-lg bg-indigo-400 text-white font-semibold shadow-md hover:bg-indigo-500 transition"
+                >
+                  Continue
+                </button>
+              </div>
+            </div>
+
+            <!-- Right side: player list -->
+            <div class="added-players text-left">
+              <h3 class="font-semibold text-gray-800 mb-2">Players</h3>
+
+              <!-- 
+              Unordered list where JS injects <li> for each player:
+              - id="playersList" used by renderPlayersList()
+            -->
+              <ul id="playersList" class="space-y-2"></ul>
+
+              <p class="text-sm text-gray-500 mt-1">
+                You can remove a player by clicking the ✕ button.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- =========================
+           Step 2: Difficulty selection
+           ========================= -->
+        <!-- 
+        This section is hidden initially (class "hidden")
+        and shown by setSection("setup-difficulty")
+      -->
+        <div class="section setup-difficulty hidden">
+          <p class="text-gray-600 mb-4 text-center">Choose your difficulty.</p>
+
+          <!-- Difficulty card: contains radio inputs for Easy / Hard -->
+          <div
+            class="flex gap-4 justify-center items-center mb-6 p-3 rounded-xl bg-indigo-50 border border-indigo-100"
+          >
+            <!-- Easy radio button -->
+            <label class="flex items-center gap-2 cursor-pointer text-gray-700">
+              <!--
+              name="difficulty" groups the radios
+              value="easy" is read by JS to set chosenDifficulty
+              checked: default selection
+            -->
+              <input
+                type="radio"
+                name="difficulty"
+                value="easy"
+                checked
+                class="accent-indigo-500"
+              />
+              <span>Easy</span>
+            </label>
+
+            <!-- Hard radio button -->
+            <label class="flex items-center gap-2 cursor-pointer text-gray-700">
+              <input
+                type="radio"
+                name="difficulty"
+                value="hard"
+                class="accent-rose-500"
+              />
+              <span>Hard</span>
+            </label>
+          </div>
+
+          <!-- Buttons below difficulty select -->
+          <div class="flex flex-col gap-3 items-center">
+            <!-- 
+            "Start Game" button:
+            - id="startGameBtn"
+            - On click: JS applies difficulty filter and opens quiz section
+          -->
+            <button
+              id="startGameBtn"
+              type="button"
+              class="w-full px-4 py-2 rounded-lg bg-emerald-500 text-white font-semibold shadow-md hover:bg-emerald-600 transition"
+            >
+              Start Game
+            </button>
+
+            <!-- "Back" button to return to player setup -->
+            <button
+              id="backToNamesBtn"
+              type="button"
+              class="text-blue-600 font-semibold hover:underline"
+            >
+              ← Back
+            </button>
+          </div>
+        </div>
+
+        <!-- =========================
+           Step 3: Quiz section
+           ========================= -->
+        <!-- 
+        Quiz section is hidden initially.
+        JS shows it with setSection("quiz") when game starts.
+      -->
+        <div class="section quiz hidden">
+          <!-- Text showing whose turn it is -->
+          <div
+            id="playerTurn"
+            class="text-sm text-gray-500 mb-2 text-center"
+          ></div>
+
+          <!-- Current question text -->
+          <div
+            id="question"
+            class="text-lg font-semibold text-gray-800 text-center mt-3 min-h-[3rem]"
+          ></div>
+
+          <!-- Buttons for answer options are injected here by renderQuestion() -->
+          <div id="options" class="mt-4 space-y-2"></div>
+
+          <!-- Footer bar: left = progress, right = timer -->
+          <div
+            class="quiz-footer flex items-center justify-between mt-4 text-sm text-gray-600"
+          >
+            <span id="progressBar"></span>
+            <span id="timer" class="font-semibold"></span>
+          </div>
+        </div>
+
+        <!-- =========================
+           Step 4: Results section
+           ========================= -->
+        <!-- Hidden until endGame() is called -->
+        <div class="section results hidden">
+          <h2 class="text-2xl font-bold text-center mt-2 mb-4">
+            ✨ Final Scores ✨
+          </h2>
+
+          <!-- JS writes one <p> per player with their final score -->
+          <div
+            id="scoreboard"
+            class="mt-2 space-y-1 text-left text-gray-700"
+          ></div>
+
+          <!-- Reloads the page to restart the quiz -->
+          <button
+            id="playAgainBtn"
+            type="button"
+            class="mt-6 w-full px-4 py-2 rounded-lg bg-rose-400 text-white font-semibold shadow-md hover:bg-rose-500 transition"
+          >
+            Play Again
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Attach the JavaScript logic -->
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,264 @@
+/*  ==========================================================
+    Global page background and typography
+    - Center the main container
+    - Apply gradient background
+    ========================================================== */
+body {
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  background: linear-gradient(135deg, #d0aec6ff 0%, #89aeedff 100%);
+  background-attachment: fixed;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+/*  Main container card:
+    - White card in the middle with rounded corners & shadows
+    - Holds all sections (setup, quiz, results)
+*/
+.container {
+  background: #fff;
+  padding: 30px;
+  border-radius: 20px;
+  width: 520px;
+  max-width: 95vw;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+/* Decorative circles in the background of the card */
+.container::before {
+  content: "";
+  position: absolute;
+  top: -50px;
+  left: -50px;
+  width: 150px;
+  height: 150px;
+  background: rgba(255, 182, 193, 0.3);
+  border-radius: 50%;
+  z-index: 0;
+}
+.container::after {
+  content: "";
+  position: absolute;
+  bottom: -60px;
+  right: -60px;
+  width: 180px;
+  height: 180px;
+  background: rgba(173, 216, 230, 0.3);
+  border-radius: 50%;
+  z-index: 0;
+}
+/* Main title styling */
+h1 {
+  margin-bottom: 8px;
+  font-size: 2.2em;
+  color: #3374d6ff;
+  z-index: 1;
+  position: relative;
+}
+/* Subtitles / headings */
+.subtitle {
+  margin-top: 0;
+  margin-bottom: 16px;
+  color: #555;
+}
+/* Ensure text sits above the decorative circles */
+p,
+h2,
+h3 {
+  z-index: 1;
+  position: relative;
+}
+/* Muted text style (used for helper text, status) */
+.muted {
+  color: #666;
+  font-size: 0.95em;
+}
+
+/* ==========================================================
+   Inputs and buttons
+   ========================================================== */
+input,
+button {
+  padding: 12px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 10px;
+  font-size: 1em;
+  z-index: 1;
+  position: relative;
+}
+/* Text input styling */
+input {
+  width: calc(100% - 24px);
+  border: 2px solid #a1e5f8ff;
+}
+/* Default button styling */
+button {
+  background: #ff9585ff;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+}
+/* Hover effect for buttons */
+button:hover {
+  background: #d96c8bff;
+  transform: translateY(-2px);
+}
+/* Secondary button (e.g. "Continue") */
+button.secondary {
+  background: #8aa8f8;
+}
+button.secondary:hover {
+  background: #6d8ef1;
+}
+/* Link-like button (e.g. "← Back") */
+button.linklike {
+  background: transparent;
+  box-shadow: none;
+  color: #3374d6;
+  font-weight: 600;
+}
+button.linklike:hover {
+  transform: none;
+  text-decoration: underline;
+}
+
+/* ==========================================================
+   Sections visibility (wizard steps)
+   ========================================================== */
+
+/* All sections hidden by default */
+.section {
+  display: none;
+  margin-top: 20px;
+}
+/* Only the one with .active is shown */
+.active {
+  display: block;
+}
+
+/* ==========================================================
+   Player wizard layout
+   ========================================================== */
+.player-wizard {
+  text-align: left;
+}
+/* Buttons row (Next + Continue) side by side */
+.player-wizard .row {
+  display: flex;
+  gap: 10px;
+}
+/* Side block that shows the player list */
+.added-players {
+  text-align: left;
+  margin-top: 10px;
+}
+.added-players ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.added-players li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f7f9ff;
+  border: 1px solid #e3ebff;
+  border-radius: 10px;
+  padding: 8px 12px;
+  margin: 6px 0;
+}
+/* Remove player button in list */
+.added-players li button {
+  background: #ff6b6b;
+  box-shadow: none;
+}
+.added-players li button:hover {
+  background: #e05656;
+}
+/* Information text under players list */
+.info {
+  color: #777;
+  font-size: 0.9em;
+  margin-top: 6px;
+}
+
+/* ==========================================================
+   Difficulty selector card
+   ========================================================== */
+.difficulty-card {
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+  align-items: center;
+  margin: 12px 0 22px;
+  padding: 14px;
+  border-radius: 12px;
+  background: #f5f9ff;
+  border: 1px solid #e3ebff;
+}
+.difficulty-card label {
+  cursor: pointer;
+}
+
+/* ==========================================================
+   Quiz question and options
+   ========================================================== */
+.question {
+  font-size: 1.2em;
+  margin: 20px 0;
+  color: #444;
+}
+.options button {
+  display: block;
+  width: 100%;
+  margin: 6px 0;
+  background: #a6c1ee;
+  border-radius: 8px;
+}
+.options button:hover {
+  background: #7ea1e2;
+}
+/* Footer with progress and timer */
+.quiz-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+#progressBar {
+  font-size: 0.95em;
+}
+#timer {
+  font-weight: 600;
+}
+
+/* ==========================================================
+   Scoreboard styling
+   ========================================================== */
+#scoreboard {
+  margin-top: 20px;
+  text-align: left;
+}
+#scoreboard p {
+  margin: 8px 0;
+  font-size: 1.05em;
+  color: #555;
+}
+
+/* ==========================================================
+   Responsive tweaks for small screens
+   ========================================================== */
+@media (max-width: 420px) {
+  .player-wizard .row {
+    flex-direction: column;
+  }
+}
