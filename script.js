@@ -1,24 +1,22 @@
 /* =============================================================
-  Quiz Battle (Multi-Player) — Player Wizard + Difficulty
+  Quiz Battle (Multi-Player) 
   --------------------------------------------------------------
   This file controls all the game logic:
   - loading questions
   - managing players & scores
-  - switching between UI steps
   - rendering questions and options
   - handling timer in hard mode
 ============================================================= */
 
+// ============== Question sources & fallback ==============
+
 // Paths (URLs) to JSON files that contain questions.
-// For now, just one file: "./questions.json"
 const QUESTIONS_SOURCES = ["./questions.json"];
 
 // Fallback questions used when JSON file cannot be loaded.
 let backupQuestions = [
   {
-    // The text of the question
     questionItem: "Which organization manages hydropower projects in Bhutan?",
-    // All answer choices as an array of strings
     options: [
       "Druk Green Power Corporation",
       "Bhutan Power Corporation",
@@ -26,7 +24,6 @@ let backupQuestions = [
       "Royal Energy Agency",
     ],
     answer: "Druk Green Power Corporation",
-    // Difficulty tag used for filtering
     difficulty: "easy",
   },
   {
@@ -69,52 +66,35 @@ let backupQuestions = [
 
 // ============== Global game state ==============
 
-// Array to store player names
-let playerNames = [];
-
-// Parallel array of scores, same length as playerNames
-// e.g. [2, 3] means player 0 has 2 points, player 1 has 3 points.
-let scores = [];
-
-// Index (0-based) of the player whose turn it is.
-let currentPlayer = 0;
-
-// Index (0-based) of the current question in backupQuestions.
-let currentQuestion = 0;
-
-// Difficulty selected by user: "easy" or "hard".
-let chosenDifficulty = "easy";
+let playerNames = []; // array of player names
+let scores = []; // parallel array of scores
+let currentPlayer = 0; // index of player whose turn it is
+let currentQuestion = 0; // index of current question
+let chosenDifficulty = "easy"; // "easy" or "hard"
+let playerIndexCounter = 1; // used for label "Player X name"
+let answersLog = []; // stores question/answer history
 
 // ============== Timer constants & state ==============
 
-// Total seconds allowed per question in easy and hard mode.
 const EASY_MODE_TIMER_SECONDS = 10;
 const HARD_MODE_TIMER_SECONDS = 15;
 
-// Generic timer state used for both easy and hard modes
 let questionTimerId = null;
 let questionTimeLeft = 0;
 
-// ============== Helper functions for DOM access ==============
+// ============== functions for DOM access ==============
 
-// Short helper: get element by ID.
 const byId = (id) => document.getElementById(id);
-
-// Short helper: select first matching element by CSS selector.
 const selectOne = (selector) => document.querySelector(selector);
 
 // ============== Section / UI helper functions ==============
 
-
 function setSection(name) {
-  // Hide all elements with class "section"
   document
     .querySelectorAll(".section")
     .forEach((sectionElement) => sectionElement.classList.add("hidden"));
 
-  // Find the section that also has the given name as a class (e.g. ".section.quiz")
   const el = selectOne(`.section.${name}`);
-  // If it exists, remove "hidden" so it becomes visible
   if (el) el.classList.remove("hidden");
 }
 
@@ -135,23 +115,16 @@ function setMsg(text) {
  * If all fail, keeps the built-in backupQuestions.
  */
 async function loadQuestions() {
-  // Loop through each URL (currently only "./questions.json")
   for (const url of QUESTIONS_SOURCES) {
     try {
-      // Fetch the JSON file (no-cache to avoid stale data)
       const response = await fetch(url, { cache: "no-cache" });
-      // If HTTP status is not OK (e.g. 404), try next URL
       if (!response.ok) continue;
 
-      // Parse JSON body
       const data = await response.json();
 
-      // Ensure it's a non-empty array
       if (Array.isArray(data) && data.length) {
-        // Validate structure
         validateQuestions(data);
 
-        // Map each question to ensure difficulty is defined or left undefined
         backupQuestions = data.map((questionItem) => ({
           ...questionItem,
           difficulty: questionItem.difficulty || undefined,
@@ -162,16 +135,13 @@ async function loadQuestions() {
           url,
           `(${backupQuestions.length})`
         );
-        // If we successfully loaded one file, we stop checking others
         return;
       }
     } catch (showError) {
-      // Log error but continue with next URL
       console.warn("[Quiz] Failed to load", url, showError);
     }
   }
 
-  // If we reach here, all external sources failed
   console.log(
     "[Quiz] Using built-in fallback questions",
     backupQuestions.length
@@ -194,6 +164,7 @@ function validateQuestions(data) {
 }
 
 // ============== Player management ==============
+
 /**
  * Read name from input, validate it, add to playerNames,
  * reset scores array, and update UI.
@@ -202,34 +173,21 @@ function addPlayerFromInput() {
   const input = byId("playerNameInput");
   if (!input) return;
 
-  // Remove extra spaces from both ends of the input
   const name = input.value.trim();
-
-  // If name is empty, show validation message
   if (!name) {
     setMsg("Please enter a name.");
     return;
   }
 
-  // Add to players array
   playerNames.push(name);
-
-  // Rebuild scores so length matches number of players
   scores = new Array(playerNames.length).fill(0);
 
-  // Clear the input field for the next player
   input.value = "";
 
-  // Next player label index is players.length + 1
   playerIndexCounter = playerNames.length + 1;
-
-  // Update label "Player X name"
   updatePlayerPrompt();
-
-  // Re-render the list of players on the right
   renderPlayersList();
 
-  // Show confirmation message
   setMsg(`Added "${name}". Enter Player ${playerIndexCounter} or continue.`);
 }
 
@@ -238,17 +196,11 @@ function addPlayerFromInput() {
  * reset scores, and refresh UI.
  */
 function removePlayerAt(index) {
-  // Remove 1 element at the given index
   playerNames.splice(index, 1);
-
-  // Reset scores to match new player count
   scores = new Array(playerNames.length).fill(0);
 
-  // Update label index counter
   playerIndexCounter = playerNames.length + 1;
   updatePlayerPrompt();
-
-  // Refresh player list UI
   renderPlayersList();
 
   setMsg("Player removed.");
@@ -267,37 +219,27 @@ function updatePlayerPrompt() {
 
 /**
  * Render the current players into the <ul id="playersList">.
- * Each item has the player's name and a remove (✕) button.
  */
 function renderPlayersList() {
   const ul = byId("playersList");
   if (!ul) return;
 
-  // Clear existing list items
   ul.innerHTML = "";
 
-  // For each player in playerNames...
   playerNames.forEach((playerName, i) => {
-    // Create <li>
     const listItem = document.createElement("li");
-    // Tailwind classes for styling each list item
     listItem.className =
       "flex items-center justify-between bg-indigo-50 border border-indigo-100 rounded-lg px-3 py-2";
-    // Put the name inside a <span>
     listItem.innerHTML = `<span>${playerName}</span>`;
 
-    // Create remove button
     const playerRemove = document.createElement("button");
-    playerRemove.setAttribute("type", "button");
+    playerRemove.type = "button";
     playerRemove.setAttribute("aria-label", `Remove ${playerName}`);
     playerRemove.textContent = "✕";
-    // Tailwind classes for the remove button
     playerRemove.className =
       "ml-3 px-2 py-1 rounded-md bg-red-500 text-white text-xs font-semibold hover:bg-red-600 transition";
-    // When clicked, remove this player
     playerRemove.onclick = () => removePlayerAt(i);
 
-    // Add button into list item, then list item into <ul>
     listItem.appendChild(playerRemove);
     ul.appendChild(listItem);
   });
@@ -313,30 +255,22 @@ function applyDifficultyFilter() {
   let pool;
 
   if (chosenDifficulty === "easy") {
-    // Keep questions that are easy or have no difficulty specified
     pool = backupQuestions.filter(
       (questionItem) =>
         !questionItem.difficulty || questionItem.difficulty === "easy"
     );
   } else {
-    // Hard difficulty: prefer questions marked "hard"
     const hardOnly = backupQuestions.filter(
       (questionItem) => questionItem.difficulty === "hard"
     );
-    // If there are hard-only questions, use them; otherwise use all questions
     pool = hardOnly.length ? hardOnly : backupQuestions.slice();
   }
 
-  // Safety: if pool somehow ends up empty, use all questions
   if (!pool.length) pool = backupQuestions.slice();
 
-  // Randomize question order
   shuffleArray(pool);
-
-  // Replace global questions array with filtered pool
   backupQuestions = pool;
 
-  // Reset question index, current player, and scores for a fresh game
   currentQuestion = 0;
   currentPlayer = 0;
   scores = new Array(playerNames.length).fill(0);
@@ -347,18 +281,13 @@ function applyDifficultyFilter() {
  */
 function shuffleArray(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
-    // Pick random index from 0 to i
     const j = Math.floor(Math.random() * (i + 1));
-    // Swap arr[i] and arr[j]
     [arr[i], arr[j]] = [arr[j], arr[i]];
   }
 }
 
 // ============== Quiz flow: rendering & transitions ==============
 
-/**
- * Show quiz section and render the first question.
- */
 function showQuiz() {
   setSection("quiz");
   renderQuestion();
@@ -368,44 +297,33 @@ function showQuiz() {
  * Render the current question, options, progress, and timer.
  */
 function renderQuestion() {
-  // If there are no more questions, end the game
   if (currentQuestion >= backupQuestions.length) return endGame();
 
-  // Show whose turn it is, if we have players
   byId("playerTurn").innerText = playerNames.length
     ? `It's ${playerNames[currentPlayer]}'s turn`
     : "Question";
 
-  // Get current question object from array
   const questionObject = backupQuestions[currentQuestion];
-
-  // Put question text into <div id="question">
   byId("question").innerText = questionObject.questionItem;
 
-  // Clear old answer buttons and create new ones
   const optDiv = byId("options");
   optDiv.innerHTML = "";
   questionObject.options.forEach((answerOption) => {
     const btn = document.createElement("button");
-    btn.setAttribute("type", "button");
+    btn.type = "button";
     btn.innerText = answerOption;
-    // Tailwind classes for answer buttons
     btn.className =
       "w-full px-4 py-2 rounded-lg bg-indigo-400 text-white font-semibold shadow hover:bg-indigo-500 transition text-left";
-    // When clicked, call onAnswer with chosen option
     btn.onclick = () => onAnswer(answerOption);
     optDiv.appendChild(btn);
   });
 
-  // Update progress indicator "Question X / Y"
   byId("progressBar").innerText = `Question ${currentQuestion + 1} / ${
     backupQuestions.length
   }`;
 
-  // Clear any previous timer so we don't stack intervals
   clearTimer();
 
-  // Decide time based on difficulty and start timer for every question
   const secondsForThisQuestion =
     chosenDifficulty === "hard"
       ? HARD_MODE_TIMER_SECONDS
@@ -413,34 +331,45 @@ function renderQuestion() {
 
   startTimer(secondsForThisQuestion);
 }
+
 /**
  * Handle a player's selected answer.
  */
 function onAnswer(selected) {
-  const correct = backupQuestions[currentQuestion].answer;
-  // If answer is correct, give 1 point to current player
-  if (selected === correct) {
+  const questionObject = backupQuestions[currentQuestion];
+  const correct = questionObject.answer;
+  const isCorrect = selected === correct;
+
+  answersLog.push({
+    playerIndex: currentPlayer,
+    playerName: playerNames[currentPlayer],
+    questionNumber: currentQuestion + 1,
+    question: questionObject.questionItem,
+    options: questionObject.options,
+    selectedAnswer: selected,
+    correctAnswer: correct,
+    isCorrect: isCorrect,
+  });
+
+  if (isCorrect) {
     scores[currentPlayer]++;
   }
-  // Move to next player's turn (and maybe next question)
+
   nextTurn();
 }
 
 /**
  * Advance to next player.
  * After last player, move to next question.
- * If no more questions, end the game.
  */
 function nextTurn() {
   currentPlayer++;
 
-  // If we've gone past last player index, wrap around and go to next question
   if (currentPlayer >= playerNames.length) {
     currentPlayer = 0;
     currentQuestion++;
   }
 
-  // If we passed the last question index, end game; otherwise, show next question
   if (currentQuestion >= backupQuestions.length) {
     endGame();
   } else {
@@ -449,12 +378,13 @@ function nextTurn() {
 }
 
 /**
- * Stop timer, switch to results section, and render scores.
+ * Stop timer, switch to results section, and render scores and review.
  */
 function endGame() {
   clearTimer();
   setSection("results");
   renderScores();
+  renderAnswersReview();
 }
 
 /**
@@ -474,41 +404,73 @@ function renderScores() {
   });
 }
 
+/**
+ * Show a detailed list of each question and what each player answered.
+ */
+function renderAnswersReview() {
+  const reviewDiv = byId("answersReview");
+  if (!reviewDiv) return;
+
+  reviewDiv.innerHTML = "";
+
+  if (!answersLog.length) {
+    reviewDiv.innerText = "No answers were recorded.";
+    return;
+  }
+
+  answersLog.forEach((entry) => {
+    const wrapper = document.createElement("div");
+    wrapper.className = "border border-gray-200 rounded-lg p-3 bg-gray-50";
+
+    const header = document.createElement("p");
+    header.className = "font-semibold text-gray-800";
+    header.innerText = `Q${entry.questionNumber}. ${entry.question}`;
+    wrapper.appendChild(header);
+
+    const playerLine = document.createElement("p");
+    playerLine.className = "text-xs text-gray-500 mb-1";
+    playerLine.innerText = `Player: ${entry.playerName}`;
+    wrapper.appendChild(playerLine);
+
+    const selectedLine = document.createElement("p");
+    selectedLine.className = "mt-1";
+    selectedLine.innerHTML = `<span class="font-medium">Your answer:</span> ${entry.selectedAnswer}`;
+    wrapper.appendChild(selectedLine);
+
+    const correctLine = document.createElement("p");
+    correctLine.innerHTML = `<span class="font-medium">Correct answer:</span> ${entry.correctAnswer}`;
+    wrapper.appendChild(correctLine);
+
+    const resultLine = document.createElement("p");
+    resultLine.className =
+      "mt-1 font-semibold " +
+      (entry.isCorrect ? "text-emerald-600" : "text-rose-600");
+    resultLine.innerText = entry.isCorrect ? "✅ Correct" : "❌ Incorrect";
+    wrapper.appendChild(resultLine);
+
+    reviewDiv.appendChild(wrapper);
+  });
+}
+
 // ============== Hard mode timer ==============
 
-/**
- * Start countdown timer for current question in hard mode.
- * When time hits 0, automatically move to next turn.
- */
 function startTimer(totalSeconds) {
-  // Reset remaining time
   questionTimeLeft = totalSeconds;
-
-  // Show initial value: "⏳ Xs"
   byId("timer").innerText = `⏳ ${questionTimeLeft}s`;
 
-  // Set up interval to run once per second
   questionTimerId = setInterval(() => {
-    // Decrease remaining time
     questionTimeLeft--;
 
-    // If time is up
     if (questionTimeLeft <= 0) {
-      // Stop timer
       clearTimer();
-      // Move on as if player did not answer
       nextTurn();
       return;
     }
 
-    // Update displayed seconds
     byId("timer").innerText = `⏳ ${questionTimeLeft}s`;
   }, 1000);
 }
 
-/**
- * Clear the timer interval if it is running.
- */
 function clearTimer() {
   if (questionTimerId) {
     clearInterval(questionTimerId);
@@ -518,33 +480,22 @@ function clearTimer() {
 
 // ============== App initialization ==============
 
-/**
- * Main entry point: runs when HTML is fully loaded.
- * Wires up event listeners and loads questions.
- */
 window.addEventListener("DOMContentLoaded", async () => {
-
-  // Try to load questions from external JSON first
   await loadQuestions();
 
-  // Grab main elements used in setup
   const addBtn = byId("addPlayerBtn");
   const contBtn = byId("continueToDifficultyBtn");
   const input = byId("playerNameInput");
 
-  // If any critical elements are missing, stop
   if (!addBtn || !contBtn || !input) {
     console.error("[Quiz] Setup elements missing.");
     return;
   }
 
-  // Show the first step (player setup) explicitly
   setSection("setup-names");
 
-  // Add player when "Add Player" button is clicked
   addBtn.addEventListener("click", addPlayerFromInput);
 
-  // Add player when Enter is pressed in the input
   input.addEventListener("keydown", (playerEnter) => {
     if (playerEnter.key === "Enter") {
       playerEnter.preventDefault();
@@ -552,7 +503,6 @@ window.addEventListener("DOMContentLoaded", async () => {
     }
   });
 
-  // "Continue" button: go to difficulty selection if at least 1 player
   contBtn.addEventListener("click", () => {
     if (playerNames.length < 1) {
       setMsg("Add at least one player before continuing.");
@@ -561,7 +511,6 @@ window.addEventListener("DOMContentLoaded", async () => {
     setSection("setup-difficulty");
   });
 
-  // Difficulty radio buttons: update chosenDifficulty on change
   document
     .querySelectorAll('input[name="difficulty"]')
     .forEach((difficultOption) => {
@@ -570,20 +519,16 @@ window.addEventListener("DOMContentLoaded", async () => {
       });
     });
 
-  // Get buttons for starting game, going back, and playing again
   const startBtn = byId("startGameBtn");
   const backBtn = byId("backToNamesBtn");
   const againBtn = byId("playAgainBtn");
 
-  // Start game: apply difficulty filter and show quiz
   startBtn.addEventListener("click", () => {
     applyDifficultyFilter();
     showQuiz();
   });
 
-  // Back: return to player setup step
   backBtn.addEventListener("click", () => setSection("setup-names"));
 
-  // Play again: reload the page from scratch
   againBtn.addEventListener("click", () => location.reload());
 });
