@@ -148,9 +148,7 @@ async function loadQuestions() {
   );
 }
 
-/**
- * Validate that each question in data has the expected structure.
- */
+//Validate that each question in data has the expected structure.
 function validateQuestions(data) {
   data.forEach((questionItem, i) => {
     if (
@@ -206,9 +204,7 @@ function removePlayerAt(index) {
   setMsg("Player removed.");
 }
 
-/**
- * Update the label above the input field to show "Player X name".
- */
+//Update the label above the input field to show "Player X name".
 function updatePlayerPrompt() {
   const playerLabel = byId("playerPrompt");
   if (playerLabel) {
@@ -217,9 +213,7 @@ function updatePlayerPrompt() {
   }
 }
 
-/**
- * Render the current players into the <ul id="playersList">.
- */
+//Render the current players into the <ul id="playersList">.
 function renderPlayersList() {
   const ul = byId("playersList");
   if (!ul) return;
